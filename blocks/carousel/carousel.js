@@ -60,12 +60,28 @@ export default function decorate(block) {
     images.forEach((img, imgIndex) => {
       const imgId = `carousel_${index}_image_${imgIndex}`;
       img.id = imgId;
-      
-      // If image is inside a picture element, also add a data attribute to the picture
-      const picture = img.closest('picture');
-      if (picture) {
-        picture.setAttribute('data-img-id', imgId);
-      }
+    });
+
+    // Add indexed IDs to text content divs only
+    const cardBodies = block.querySelectorAll('.cards-card-body');
+    cardBodies.forEach((cardBody, bodyIndex) => {
+      cardBody.id = `carousel_${index}_container_${bodyIndex}`;
+      cardBody.setAttribute('data-container-index', bodyIndex);
+    });
+
+    // Add indexed IDs to heading elements with container context
+    ['h1', 'h2', 'h3', 'h4', 'h5', 'h6','p'].forEach((tag) => {
+      const elements = block.querySelectorAll(tag);
+      elements.forEach((el) => {
+        const container = el.closest('[data-container-index]');
+        const containerIndex = container ? container.getAttribute('data-container-index') : 'unknown';
+        
+        // Count this tag within its container
+        const containerElements = container ? container.querySelectorAll(tag) : [el];
+        const tagIndex = Array.from(containerElements).indexOf(el);
+        
+        el.id = `carousel_${index}_container_${containerIndex}_${tag}_${tagIndex}`;
+      });
     });
   });
 }
