@@ -180,7 +180,7 @@ export default function decorate(block) {
       const containerElements = container ? container.querySelectorAll(tag) : [el];
       const tagIndex = Array.from(containerElements).indexOf(el);
       
-      el.id = `columns_${blockIndex}_container_${containerIndex}_${tag}_${tagIndex}`;
+      el.id = `columns_${blockIndex}_text_${containerIndex}_${tag}_${tagIndex}`;
     });
   });
 }

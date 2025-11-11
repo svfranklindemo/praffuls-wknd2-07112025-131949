@@ -80,7 +80,7 @@ export default function decorate(block) {
         const containerElements = container ? container.querySelectorAll(tag) : [el];
         const tagIndex = Array.from(containerElements).indexOf(el);
         
-        el.id = `carousel_${index}_container_${containerIndex}_${tag}_${tagIndex}`;
+        el.id = `carousel_${index}_text_${containerIndex}_${tag}_${tagIndex}`;
       });
     });
   });
