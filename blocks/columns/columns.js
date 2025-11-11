@@ -125,9 +125,9 @@ export default function decorate(block) {
       // Check for text content (paragraphs or headings)
       const textContent = col.querySelector('p, h1, h2, h3, h4, h5, h6');
       if (textContent && !pic) {  // Only add if no picture (avoid double counting)
-        const contentWrapper = textContent.closest('div');
-        if (contentWrapper) {
-          contentWrapper.setAttribute('data-container-index', contentCounter);
+        const textBlock = textContent.closest('div');
+        if (textBlock) {
+          textBlock.setAttribute('data-text-block-index', contentCounter);
           contentCounter++;
         }
       }
@@ -173,14 +173,14 @@ export default function decorate(block) {
   ['h1', 'h2', 'h3', 'h4', 'h5', 'h6','p'].forEach((tag) => {
     const elements = block.querySelectorAll(tag);
     elements.forEach((el) => {
-      const container = el.closest('[data-container-index]');
-      const containerIndex = container ? container.getAttribute('data-container-index') : 'unknown';
+      const textBlock = el.closest('[data-text-block-index]');
+      const textBlockIndex = textBlock ? textBlock.getAttribute('data-text-block-index') : 'unknown';
       
       // Count this tag within its container
       const containerElements = container ? container.querySelectorAll(tag) : [el];
       const tagIndex = Array.from(containerElements).indexOf(el);
       
-      el.id = `columns_${blockIndex}_text_${containerIndex}_${tag}_${tagIndex}`;
+      el.id = `columns_${blockIndex}_text_${textBlockIndex}_${tag}_${tagIndex}`;
     });
   });
 }

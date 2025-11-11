@@ -65,22 +65,21 @@ export default function decorate(block) {
     // Add indexed IDs to text content divs only
     const cardBodies = block.querySelectorAll('.cards-card-body');
     cardBodies.forEach((cardBody, bodyIndex) => {
-      cardBody.id = `carousel_${index}_container_${bodyIndex}`;
-      cardBody.setAttribute('data-container-index', bodyIndex);
+      cardBody.setAttribute('data-text-block-index', bodyIndex);
     });
 
     // Add indexed IDs to heading elements with container context
     ['h1', 'h2', 'h3', 'h4', 'h5', 'h6','p'].forEach((tag) => {
       const elements = block.querySelectorAll(tag);
       elements.forEach((el) => {
-        const container = el.closest('[data-container-index]');
-        const containerIndex = container ? container.getAttribute('data-container-index') : 'unknown';
+        const textBlock = el.closest('[data-text-block-index]');
+        const textBlockIndex = textBlock ? textBlock.getAttribute('data-text-block-index') : 'unknown';
         
         // Count this tag within its container
-        const containerElements = container ? container.querySelectorAll(tag) : [el];
-        const tagIndex = Array.from(containerElements).indexOf(el);
+        const textBlockElements = textBlock ? textBlock.querySelectorAll(tag) : [el];
+        const tagIndex = Array.from(textBlockElements).indexOf(el);
         
-        el.id = `carousel_${index}_text_${containerIndex}_${tag}_${tagIndex}`;
+        el.id = `carousel_${index}_text_${textBlockIndex}_${tag}_${tagIndex}`;
       });
     });
   });
