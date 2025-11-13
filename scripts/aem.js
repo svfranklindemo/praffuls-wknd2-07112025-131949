@@ -736,7 +736,7 @@ export function decorateDefaultBlock() {
       ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'].forEach((tag) => {
         const elements = block.querySelectorAll(tag);
         elements.forEach((el, elIndex) => {
-          el.id = `${shortBlockName}_${index}_${tag}_${elIndex}`;
+          el.id = `section_${index}_${tag}_${elIndex}`;
         });
       });
     }
