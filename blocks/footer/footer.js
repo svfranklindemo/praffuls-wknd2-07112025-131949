@@ -36,5 +36,11 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
+  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'].forEach((tag) => {
+    const elements = footer.querySelectorAll(tag);
+    elements.forEach((el, elIndex) => {
+      el.id = `footer_0_${tag}_${elIndex}`;
+    });
+  });
   block.append(footer);
 }
